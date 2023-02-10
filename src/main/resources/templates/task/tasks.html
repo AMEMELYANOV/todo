@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="fragment/head :: head">
+    <head/>
+<body>
+<div th:insert="fragment/navbefore :: navbefore"></div>
+<div class="container mt-3">
+    <div class="card" style="width: 100%">
+        <div class="card-header">
+            <b>Список задач</b>
+            <div class="row mt-4 border-top">
+                <div class="col-7 mt-4 ml-4">
+                    <a th:href="@{/addTask}" class="btn btn-secondary">
+                        Добавить</a>
+                </div>
+                <div class="col-md-auto mt-4">
+                    <span>
+                        Списки задач:
+                        <a th:href="@{/tasks}" class="btn btn-link">Все</a> /
+                        <a th:href="@{/newTasks}" class="btn btn-link">Новые</a> /
+                        <a th:href="@{/doneTasks}" class="btn btn-link">Выполнено</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4 ml-4">
+                <div class="col-6" style="font-weight:bold;">Название задачи</div>
+                <div class="col-3" style="font-weight:bold;">Дата создания</div>
+                <div class="col-3" style="font-weight:bold;">Статус</div>
+            </div>
+            <div class="row mb-3 pb-3 ml-4 border-bottom" th:each="task: ${tasks}">
+                <div class="col-6"><a style="color:black" th:href="@{/taskDetails(taskId=${task.id})}"
+                                      th:text="${task.name}"/></div>
+                <div class="col-3" th:text="${#dates.format(task.created, 'dd MMMM yyyy')}"></div>
+                <div class="col-3">
+                    <span color="green" th:if="${task.done == false}">Активно</span>
+                    <span th:unless="${task.done == false}">Выполнено</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

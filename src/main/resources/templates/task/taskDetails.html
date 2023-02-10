@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="fragment/head :: head">
+    <head/>
+<body>
+<div th:insert="fragment/navbefore :: navbefore"></div>
+<div class="container mt-3">
+    <div class="card" style="width: 100%">
+        <div class="card-header">
+            <b>Подробное описание задачи</b>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4 ml-4">
+                <div class="col-2" style="font-weight:bold;">Название задачи</div>
+                <div class="col-4" style="font-weight:bold;">Подробное описание</div>
+                <div class="col-2" style="font-weight:bold;">Дата создания</div>
+                <div class="col-2" style="font-weight:bold;">Статус</div>
+                <div class="col-2" style="font-weight:bold;">Действия</div>
+            </div>
+            <div class="row mb-3 ml-4">
+                <div class="col-2" th:text="${task.name}"></div>
+                <div class="col-4" th:text="${task.description}"></div>
+                <div class="col-2" th:text="${#dates.format(task.created, 'dd MMMM yyyy')}"></div>
+                <div class="col-2">
+                    <span color="green" th:if="${task.done == false}">Активно</span>
+                    <span  th:unless="${task.done == false}">Выполнено</span>
+                </div>
+                <div class="col-2">
+                    <div class="row mb-1">
+                        <a th:href="@{/taskDone(taskId=${task.id})}" class="btn btn-secondary">Выполнено</a>
+                    </div>
+                    <div class="row mb-1">
+                        <a th:href="@{/editTask(taskId=${task.id})}" class="btn btn-secondary">Отредактировать</a>
+                    </div>
+                    <div class="row mb-1">
+                        <a th:href="@{/deleteTask(taskId=${task.id})}" class="btn btn-secondary">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

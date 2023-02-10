@@ -1,0 +1,16 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="fragment/head :: head"> <head/>
+<body>
+<div th:insert="fragment/navbefore :: navbefore"></div>
+<div class="container mt-3">
+    <div class="card" style="width: 100%">
+        <div class="card-header">
+            Отредактировать задачу
+        </div>
+        <div th:insert="fragment/taskEditForm :: taskEditForm"></div>
+    </div>
+</div>
+</div>
+</body>
+</html>
