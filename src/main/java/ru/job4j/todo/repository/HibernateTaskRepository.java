@@ -45,7 +45,7 @@ public class HibernateTaskRepository implements TaskRepository {
     private final static String FIND_TASK_BY_ID = "from Task t where t.id = :id";
 
     /**
-     * SQL запрос по удалению сеансов из таблицы tasks с фильтром по id
+     * SQL запрос по удалению задач из таблицы tasks с фильтром по id
      */
     private final static String DELETE_TASK_BY_ID = "delete Task where id = :id";
 
@@ -79,7 +79,7 @@ public class HibernateTaskRepository implements TaskRepository {
     /**
      * Возвращает список всех задач
      *
-     * @return список всех сеансов
+     * @return список всех задач
      */
     @Override
     public List<Task> findAllTasks() {
@@ -90,7 +90,7 @@ public class HibernateTaskRepository implements TaskRepository {
     /**
      * Возвращает список всех новых задач
      *
-     * @return список всех сеансов
+     * @return список всех задач
      */
     @Override
     public List<Task> findNewTasks() {
@@ -101,7 +101,7 @@ public class HibernateTaskRepository implements TaskRepository {
     /**
      * Возвращает список всех выполненных задач
      *
-     * @return список всех сеансов
+     * @return список всех задач
      */
     @Override
     public List<Task> findDoneTasks() {

@@ -16,21 +16,21 @@ public interface TaskRepository {
     /**
      * Возвращает список всех задач
      *
-     * @return список всех сеансов
+     * @return список всех задач
      */
     List<Task> findAllTasks();
 
     /**
      * Возвращает список всех новых задач
      *
-     * @return список всех сеансов
+     * @return список всех задач
      */
     List<Task> findNewTasks();
 
     /**
      * Возвращает список всех выполненных задач
      *
-     * @return список всех сеансов
+     * @return список всех задач
      */
     List<Task> findDoneTasks();
 

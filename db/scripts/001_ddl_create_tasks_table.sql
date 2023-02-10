@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS tasks (
    done BOOLEAN NOT NULL
 );
 
-COMMENT ON TABLE tasks IS 'Дела';
-COMMENT ON COLUMN tasks.id IS 'Идентификатор дела';
-COMMENT ON COLUMN tasks.name IS 'Наименование дела';
-COMMENT ON COLUMN tasks.description IS 'Подробное описание дела';
-COMMENT ON COLUMN tasks.done IS 'Статус дела';
+COMMENT ON TABLE tasks IS 'Задачи';
+COMMENT ON COLUMN tasks.id IS 'Идентификатор задачи';
+COMMENT ON COLUMN tasks.name IS 'Наименование задачи';
+COMMENT ON COLUMN tasks.description IS 'Подробное описание задачи';
+COMMENT ON COLUMN tasks.done IS 'Статус задачи';
