@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div class="card-body" th:fragment="taskEditForm">
+    <form th:action="@{/addOrUpdateTask}" th:object="${task}" method="post">
+        <table class="table">
+            <input type="hidden" name="id" th:field="*{id}"/>
+            <tr>
+                <td>Наименование :</td>
+                <td><input class="form-control" type="text" th:field="*{name}" name="name" required/></td>
+            </tr>
+            <tr>
+                <td>Описание :</td>
+                <td><textarea class="form-control" th:field="*{description}" rows="8" maxlength="400"
+                              name="description"
+                              placeholder="Не больше 400 символов" required></textarea></td>
+            </tr>
+            <tr>
+                <td>Статус задания :</td>
+                <td><select class="custom-select" th:field="*{done}">
+                    <option th:value="0" th:text="Активно"></option>
+                    <option th:value="1" th:text="Выполнено"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><input type="submit" class="btn btn-secondary" value="Сохранить"/>
+            </tr>
+        </table>
+    </form>
+</div>
+</html>
