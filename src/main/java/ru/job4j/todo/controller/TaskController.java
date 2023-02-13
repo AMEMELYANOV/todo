@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.service.TaskService;
+import ru.job4j.todo.util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,24 +31,28 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String getTasks(Model model, HttpServletRequest request) {
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("tasks", taskService.findAllTasks());
         return "task/tasks";
     }
 
     @GetMapping("/newTasks")
     public String getNewTasks(Model model, HttpServletRequest request) {
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("tasks", taskService.findNewTasks());
         return "task/tasks";
     }
 
     @GetMapping("/doneTasks")
     public String getDoneTasks(Model model, HttpServletRequest request) {
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("tasks", taskService.findDoneTasks());
         return "task/tasks";
     }
 
     @GetMapping("/addTask")
     public String addTask(Model model, HttpServletRequest request) {
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("task", new Task());
         return "task/addTask";
     }
@@ -62,6 +67,7 @@ public class TaskController {
     @GetMapping("/taskDetails{taskId}")
     public String getTaskDetails(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("task", taskService.findTaskById(taskId));
         return "task/taskDetails";
     }
@@ -70,6 +76,7 @@ public class TaskController {
     public String taskDone(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
         Task task = taskService.taskDone(taskId);
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("task", task);
         return "task/taskDetails";
     }
@@ -77,6 +84,7 @@ public class TaskController {
     @GetMapping("/editTask{taskId}")
     public String editTask(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
+        model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("task", taskService.findTaskById(taskId));
         return "task/editTask";
     }
