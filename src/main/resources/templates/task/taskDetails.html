@@ -9,32 +9,49 @@
         <div class="card-header">
             <b>Подробное описание задачи</b>
         </div>
-        <div class="card-body">
+        <div class="card-body justify-content-center">
             <div class="row mb-4 ml-4">
                 <div class="col-2" style="font-weight:bold;">Название задачи</div>
-                <div class="col-4" style="font-weight:bold;">Подробное описание</div>
-                <div class="col-2" style="font-weight:bold;">Дата создания</div>
-                <div class="col-2" style="font-weight:bold;">Статус</div>
+                <div class="col-6" style="font-weight:bold;">Подробное описание</div>
+                <div class="col-4" style="font-weight:bold;">Дата создания</div>
                 <div class="col-2" style="font-weight:bold;">Действия</div>
             </div>
-            <div class="row mb-3 ml-4">
+            <div class="row mb-4 ml-4">
                 <div class="col-2" th:text="${task.name}"></div>
-                <div class="col-4" th:text="${task.description}"></div>
+                <div class="col-6" th:text="${task.description}"></div>
                 <div class="col-2" th:text="${#dates.format(task.created, 'dd MMMM yyyy')}"></div>
                 <div class="col-2">
-                    <span color="green" th:if="${task.done == false}">Активно</span>
-                    <span  th:unless="${task.done == false}">Выполнено</span>
+                        <div class="row mb-1">
+                            <form th:action="@{/taskDone}" method="get">
+                                <input type="hidden" name="taskId" th:value="${task.id}"/>
+                                <button type="submit" class="btn btn-secondary">Выполнено</button>
+                            </form>
+                        </div>
+                        <div class="row mb-1">
+                            <form th:action="@{/editTask}" method="get">
+                                <input type="hidden" name="taskId" th:value="${task.id}"/>
+                                <button type="submit" class="btn btn-secondary">Редактировать</button>
+                            </form>
+                        </div>
+                        <div class="row mb-1">
+                            <form th:action="@{/deleteTask}" method="get">
+                                <input type="hidden" name="taskId" th:value="${task.id}"/>
+                                <button type="submit" class="btn btn-secondary">Удалить</button>
+                            </form>
+                        </div>
                 </div>
-                <div class="col-2">
-                    <div class="row mb-1">
-                        <a th:href="@{/taskDone(taskId=${task.id})}" class="btn btn-secondary">Выполнено</a>
-                    </div>
-                    <div class="row mb-1">
-                        <a th:href="@{/editTask(taskId=${task.id})}" class="btn btn-secondary">Отредактировать</a>
-                    </div>
-                    <div class="row mb-1">
-                        <a th:href="@{/deleteTask(taskId=${task.id})}" class="btn btn-secondary">Удалить</a>
-                    </div>
+            </div>
+            <div class="row mb-4 ml-4 mt-4">
+                <div class="col-3" style="font-weight:bold;">Пользователь</div>
+                <div class="col-3" style="font-weight:bold;">Приоритет</div>
+                <div class="col-3" style="font-weight:bold;">Статус</div>
+            </div>
+            <div class="row mb-3 ml-4">
+                <div class="col-3" th:text="${task.user.name}"></div>
+                <div class="col-3" th:text="${task.priority.name}"></div>
+                <div class="col-3">
+                    <span color="green" th:if="${task.done == false}">Активно</span>
+                    <span th:unless="${task.done == false}">Выполнено</span>
                 </div>
             </div>
         </div>

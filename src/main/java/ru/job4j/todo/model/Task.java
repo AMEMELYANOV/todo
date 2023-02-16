@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * Модель данных задачи
+ *
  * @author Alexander Emelyanov
  * @version 1.0
  */
@@ -48,4 +49,18 @@ public class Task {
      * Статус задачи
      */
     private boolean done;
+
+    /**
+     * Пользователь задачи
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    /**
+     * Приоритет задачи
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "priority_id")
+    private Priority priority;
 }

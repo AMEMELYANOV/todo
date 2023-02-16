@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.Task;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.TaskService;
 import ru.job4j.todo.util.UserUtil;
 
@@ -52,14 +50,18 @@ public class TaskController {
 
     @GetMapping("/addTask")
     public String addTask(Model model, HttpServletRequest request) {
-        model.addAttribute("user", UserUtil.getSessionUser(request));
-        model.addAttribute("task", new Task());
+        User user = UserUtil.getSessionUser(request);
+        model.addAttribute("user", user);
+        Task task = new Task();
+        model.addAttribute("task", task);
         return "task/addTask";
     }
 
     @PostMapping("/addOrUpdateTask")
     public String saveTask(@ModelAttribute Task task,
                            HttpServletRequest request) {
+        User user = UserUtil.getSessionUser(request);
+        task.setUser(user);
         taskService.addOrUpdateTask(task);
         return "redirect:/tasks";
     }

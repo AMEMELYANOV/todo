@@ -1,8 +1,10 @@
 package ru.job4j.todo.service;
 
+import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Сервис по работе с задачами
@@ -81,4 +83,13 @@ public interface TaskService {
      * @param id идентификатор задачи
      */
     void deleteTaskById(int id);
+
+    /**
+     * Выполняет поиск приоритета по имени. При успешном нахождении возвращает
+     * приоритет, иначе выбрасывает исключение.
+     *
+     * @param name имя приоритета
+     * @return приоритет при успешном нахождении
+     */
+    Priority findPriorityByName(String name);
 }
