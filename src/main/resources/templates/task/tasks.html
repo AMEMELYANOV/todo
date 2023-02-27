@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
             <div class="row mb-4 ml-4">
-                <div class="col-4" style="font-weight:bold;">Название задачи</div>
+                <div class="col-2" style="font-weight:bold;">Название задачи</div>
                 <div class="col-2" style="font-weight:bold;">Дата создания</div>
                 <div class="col-2" style="font-weight:bold;">Пользователь</div>
                 <div class="col-2" style="font-weight:bold;">Категория</div>
@@ -33,13 +33,17 @@
                 <div class="col-2" style="font-weight:bold;">Статус</div>
             </div>
             <div class="row mb-3 pb-3 ml-4 border-bottom" th:each="task: ${tasks}">
-                <div class="col-4"><a style="color:black" th:href="@{/taskDetails(taskId=${task.id})}"
+                <div class="col-2"><a style="color:black" th:href="@{/taskDetails(taskId=${task.id})}"
                                       th:text="${task.name}"/></div>
                 <div class="col-2" th:text="${#dates.format(task.created, 'dd MMMM yyyy')}"></div>
                 <div class="col-2" th:text="${task.user.name}"></div>
-                <div class="col-2" th:each="category: ${task.categories}">
+                <div class="col-2">
                     <ul>
-                        <li th:text="${category.name}"></li>
+                        <div class="col" th:each="category: ${task.categories}">
+
+                            <li th:text="${category.name}"></li>
+
+                        </div>
                     </ul>
                 </div>
                 <div class="col-2" th:text="${task.priority.name}"></div>

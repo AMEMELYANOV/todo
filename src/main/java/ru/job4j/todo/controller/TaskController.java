@@ -5,12 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
+import ru.job4j.todo.service.CategoryService;
 import ru.job4j.todo.service.TaskService;
 import ru.job4j.todo.util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Контроллер задач
@@ -26,6 +30,11 @@ public class TaskController {
      * Объект для доступа к методам TaskService
      */
     private final TaskService taskService;
+
+    /**
+     * Объект для доступа к методам CategoryService
+     */
+    private final CategoryService categoryService;
 
     @GetMapping("/tasks")
     public String getTasks(Model model, HttpServletRequest request) {
@@ -53,15 +62,19 @@ public class TaskController {
         User user = UserUtil.getSessionUser(request);
         model.addAttribute("user", user);
         Task task = new Task();
+        model.addAttribute("categories", categoryService.findAllCategories());
         model.addAttribute("task", task);
         return "task/addTask";
     }
 
     @PostMapping("/addOrUpdateTask")
     public String saveTask(@ModelAttribute Task task,
+                           @RequestParam(value = "categoryIds", required = false) List<Integer> categoryIds,
                            HttpServletRequest request) {
         User user = UserUtil.getSessionUser(request);
         task.setUser(user);
+        List<Category> categories = categoryService.findCategoriesByIds(categoryIds);
+        task.setCategories(categories);
         taskService.addOrUpdateTask(task);
         return "redirect:/tasks";
     }
@@ -86,6 +99,7 @@ public class TaskController {
     @GetMapping("/editTask{taskId}")
     public String editTask(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
+        model.addAttribute("categories", categoryService.findAllCategories());
         model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("task", taskService.findTaskById(taskId));
         return "task/editTask";

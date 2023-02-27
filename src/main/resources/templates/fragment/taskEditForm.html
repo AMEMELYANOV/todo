@@ -30,6 +30,16 @@
                 </select></td>
             </tr>
             <tr>
+                <td>Категории :</td>
+                <td>
+                    <select class="form-control" style="width: 200px;" multiple id="categories" name="categoryIds" required>
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}">
+                        </option>
+                    </select>
+            </tr>
+            <tr>
                 <td><input type="submit" class="btn btn-secondary" value="Сохранить"/>
             </tr>
         </table>
