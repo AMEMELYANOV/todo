@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * Модель данных приоритет
+ * Модель данных категория
  *
  * @author Alexander Emelyanov
  * @version 1.0
@@ -17,11 +17,11 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "priorities")
-public class Priority {
+@Table(name = "categories")
+public class Category {
 
     /**
-     * Идентификатор приоритета
+     * Идентификатор категории
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +29,7 @@ public class Priority {
     private int id;
 
     /**
-     * Наименование приоритета
+     * Наименование категории
      */
     private String name;
-
-    /**
-     * Позиция приоритета
-     */
-    private int position;
 }

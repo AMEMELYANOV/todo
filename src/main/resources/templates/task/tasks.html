@@ -28,6 +28,7 @@
                 <div class="col-4" style="font-weight:bold;">Название задачи</div>
                 <div class="col-2" style="font-weight:bold;">Дата создания</div>
                 <div class="col-2" style="font-weight:bold;">Пользователь</div>
+                <div class="col-2" style="font-weight:bold;">Категория</div>
                 <div class="col-2" style="font-weight:bold;">Приоритет</div>
                 <div class="col-2" style="font-weight:bold;">Статус</div>
             </div>
@@ -36,6 +37,11 @@
                                       th:text="${task.name}"/></div>
                 <div class="col-2" th:text="${#dates.format(task.created, 'dd MMMM yyyy')}"></div>
                 <div class="col-2" th:text="${task.user.name}"></div>
+                <div class="col-2" th:each="category: ${task.categories}">
+                    <ul>
+                        <li th:text="${category.name}"></li>
+                    </ul>
+                </div>
                 <div class="col-2" th:text="${task.priority.name}"></div>
                 <div class="col-2">
                     <span color="green" th:if="${task.done == false}">Активно</span>
