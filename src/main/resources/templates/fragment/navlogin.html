@@ -9,12 +9,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-item nav-link" th:href="@{/tasks}">Список задач</a>
+                    <a class="nav-item nav-link" th:href="@{/tasks}">Задачи</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-item nav-link" th:href="@{/userEdit}">Редактировать профиль</a>
+                    <a class="nav-item nav-link" th:href="@{/userEdit}">Профиль</a>
                 </li>
                 <li th:if="${user.login} == null" class="nav-item">
                     <a class="nav-link" th:href="@{/login}">Войти</a>
