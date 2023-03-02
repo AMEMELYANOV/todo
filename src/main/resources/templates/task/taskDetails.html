@@ -39,27 +39,29 @@
                     <span th:unless="${task.done == false}">Выполнено</span>
                 </div>
             </div>
-            <div class="row mb-3 ml-4 mt-6">
-                <div class="col-6 text-justify font-weight-bold">Действия:</div>
-            </div>
-            <div class="row mb-4 ml-4 text-justify">
-                <div class="col-auto">
-                    <form th:action="@{/taskDone}" method="get">
-                        <input type="hidden" name="taskId" th:value="${task.id}"/>
-                        <button type="submit" class="btn btn-secondary" style="width: 150px;">Выполнено</button>
-                    </form>
+            <div th:if="${user.login} == ${task.user.login}">
+                <div class="row mb-3 ml-4 mt-6">
+                    <div class="col-6 text-justify font-weight-bold">Действия:</div>
                 </div>
-                <div class="col-auto">
-                    <form th:action="@{/editTask}" method="get">
-                        <input type="hidden" name="taskId" th:value="${task.id}"/>
-                        <button type="submit" class="btn btn-secondary" style="width: 150px;">Редактировать</button>
-                    </form>
-                </div>
-                <div class="col-auto">
-                    <form th:action="@{/deleteTask}" method="get">
-                        <input type="hidden" name="taskId" th:value="${task.id}"/>
-                        <button type="submit" class="btn btn-secondary" style="width: 150px;">Удалить</button>
-                    </form>
+                <div class="row mb-4 ml-4 text-justify">
+                    <div class="col-auto">
+                        <form th:action="@{/taskDone}" method="get">
+                            <input type="hidden" name="taskId" th:value="${task.id}"/>
+                            <button type="submit" class="btn btn-secondary" style="width: 150px;">Выполнено</button>
+                        </form>
+                    </div>
+                    <div class="col-auto">
+                        <form th:action="@{/editTask}" method="get">
+                            <input type="hidden" name="taskId" th:value="${task.id}"/>
+                            <button type="submit" class="btn btn-secondary" style="width: 150px;">Редактировать</button>
+                        </form>
+                    </div>
+                    <div class="col-auto">
+                        <form th:action="@{/deleteTask}" method="get">
+                            <input type="hidden" name="taskId" th:value="${task.id}"/>
+                            <button type="submit" class="btn btn-secondary" style="width: 150px;">Удалить</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
