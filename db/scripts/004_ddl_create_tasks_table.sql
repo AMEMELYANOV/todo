@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS tasks (
    id SERIAL PRIMARY KEY,
    name varchar NOT NULL,
    description TEXT NOT NULL,
-   created TIMESTAMP NOT NULL,
+   created TIMESTAMP WITHOUT TIME ZONE NOT NULL,
    done BOOLEAN NOT NULL,
    user_id int NOT NULL REFERENCES todo_users(id),
    priority_id int NOT NULL REFERENCES priorities(id)

@@ -3,7 +3,7 @@ package ru.job4j.todo.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -43,8 +43,7 @@ public class Task {
     /**
      * Время создания задач
      */
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created = new Date(System.currentTimeMillis());
+    private LocalDateTime created = LocalDateTime.now();
 
     /**
      * Статус задачи

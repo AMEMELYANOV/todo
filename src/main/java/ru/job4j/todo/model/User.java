@@ -36,6 +36,12 @@ public class User {
     private String name;
 
     /**
+     * Часовая зона пользователя
+     */
+    @Column(name = "user_zone")
+    private String timezone;
+
+    /**
      * Логин пользователя
      */
     @NotBlank(message = "Поле не должно быть пустым")

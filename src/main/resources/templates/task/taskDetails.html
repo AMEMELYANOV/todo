@@ -19,7 +19,7 @@
             <div class="row mb-6 ml-4">
                 <div class="col-2" th:text="${task.name}"></div>
                 <div class="col-4 text-justify" th:text="${task.description}"></div>
-                <div class="col text-justify" th:text="${#dates.format(task.created, 'HH:mm dd.MM.yy')}"></div>
+                <div class="col text-justify" th:text="${#temporals.format(task.created, 'HH:mm dd.MM.yyyy')}"></div>
                 <div class="col text-justify">
                     <ul th:each="category: ${task.categories}">
                         <li class="text-left" th:text="${category.name}"></li>

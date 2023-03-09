@@ -1,6 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:insert="fragment/head :: head"> <head/>
+<head th:insert="fragment/head :: head">
+    <head/>
 <body>
 <div th:insert="fragment/navlogin :: navlogin"></div>
 <div class="container mt-3">
@@ -32,18 +33,28 @@
                     </tr>
                     <tr>
                         <div class="form-group">
-                        <td>Введите старый пароль</td>
-                        <td><input type="password" class="form-control" name="oldPassword" required></td>
+                            <td>Введите старый пароль</td>
+                            <td><input type="password" class="form-control" name="oldPassword" required></td>
                         </div>
                     </tr>
                     <tr>
                         <div class="form-group">
-                        <td>Новый пароль</td>
-                        <td><input type="password" class="form-control" name="password" th:field="*{password}" required>
-                            <span style="color:#ff0000;"
-                                  th:if="${#fields.hasErrors('password')}"
-                                  th:errors="*{password}">Password Error</span>
-                        </td>
+                            <td>Новый пароль</td>
+                            <td><input type="password" class="form-control" name="password" th:field="*{password}"
+                                       required>
+                                <span style="color:#ff0000;"
+                                      th:if="${#fields.hasErrors('password')}"
+                                      th:errors="*{password}">Password Error</span>
+                            </td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="form-group">
+                            <td>Список временных зон</td>
+                            <td><select class="custom-select" th:field="*{timezone}">
+                                    <option th:each="zone: ${zones}"
+                                            th:value="${zone}" th:text="${zone}"></option>
+                            </select></td>
                         </div>
                     </tr>
                     <tr>

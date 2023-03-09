@@ -35,7 +35,7 @@
             <div class="row mb-3 pb-3 ml-4 border-bottom" th:each="task: ${tasks}">
                 <div class="col-2 text-justify"><a style="color:black" th:href="@{/taskDetails(taskId=${task.id})}"
                                                    th:text="${task.name}"/></div>
-                <div class="col-2 text-justify" th:text="${#dates.format(task.created, 'HH:mm dd.MM.yy')}"></div>
+                <div class="col-2 text-justify" th:text="${#temporals.format(task.created, 'HH:mm dd.MM.yyyy')}"></div>
                 <div class="col-2 text-justify" th:text="${task.user.name}"></div>
                 <div class="col-2 text-justify">
                     <ul class="mb-1" th:each="category: ${task.categories}">

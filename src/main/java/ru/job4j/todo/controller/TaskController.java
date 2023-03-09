@@ -4,16 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.CategoryService;
 import ru.job4j.todo.service.TaskService;
+import ru.job4j.todo.util.DateTmeUtil;
 import ru.job4j.todo.util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -38,8 +42,19 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String getTasks(Model model, HttpServletRequest request) {
-        model.addAttribute("user", UserUtil.getSessionUser(request));
-        model.addAttribute("tasks", taskService.findAllTasks());
+        User user = UserUtil.getSessionUser(request);
+        String userTimezone = DateTmeUtil.getUserTimeZone(user);
+        List<Task> tasks = taskService.findAllTasks();
+        for (Task task : tasks) {
+            task.setCreated(
+                    task.getCreated()
+                            .atZone(ZoneId.systemDefault())
+                            .withZoneSameInstant(ZoneId.of(userTimezone))
+                            .toLocalDateTime()
+            );
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("tasks", tasks);
         return "task/tasks";
     }
 
@@ -99,9 +114,18 @@ public class TaskController {
     @GetMapping("/editTask{taskId}")
     public String editTask(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
+        User user = UserUtil.getSessionUser(request);
+        String userTimezone = DateTmeUtil.getUserTimeZone(user);
+        Task task = taskService.findTaskById(taskId);
+        task.setCreated(
+                task.getCreated()
+                        .atZone(ZoneId.systemDefault())
+                        .withZoneSameInstant(ZoneId.of(userTimezone))
+                        .toLocalDateTime()
+        );
         model.addAttribute("categories", categoryService.findAllCategories());
-        model.addAttribute("user", UserUtil.getSessionUser(request));
-        model.addAttribute("task", taskService.findTaskById(taskId));
+        model.addAttribute("user", user);
+        model.addAttribute("task", task);
         return "task/editTask";
     }
 

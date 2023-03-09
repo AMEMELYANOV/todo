@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.UserService;
+import ru.job4j.todo.util.DateTmeUtil;
 import ru.job4j.todo.util.UserUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ public class UserController {
         if (password != null) {
             errorMessage = "Неверно введен старый пароль";
         }
+        model.addAttribute("zones", DateTmeUtil.getTimeZoneIds());
         model.addAttribute("user", UserUtil.getSessionUser(request));
         model.addAttribute("errorMessage", errorMessage);
         return "user/userEdit";
