@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.CategoryService;
@@ -40,6 +39,13 @@ public class TaskController {
      */
     private final CategoryService categoryService;
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу списка всех заданий.
+     *
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница списка заданий
+     */
     @GetMapping("/tasks")
     public String getTasks(Model model, HttpServletRequest request) {
         User user = UserUtil.getSessionUser(request);
@@ -58,6 +64,13 @@ public class TaskController {
         return "task/tasks";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу списка заданий с новыми заданиями.
+     *
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница списка заданий с новыми заданиями
+     */
     @GetMapping("/newTasks")
     public String getNewTasks(Model model, HttpServletRequest request) {
         model.addAttribute("user", UserUtil.getSessionUser(request));
@@ -65,6 +78,13 @@ public class TaskController {
         return "task/tasks";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу списка заданий с выполненными заданиями.
+     *
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница списка заданий с выполненными заданиями
+     */
     @GetMapping("/doneTasks")
     public String getDoneTasks(Model model, HttpServletRequest request) {
         model.addAttribute("user", UserUtil.getSessionUser(request));
@@ -72,6 +92,13 @@ public class TaskController {
         return "task/tasks";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу добавления задания.
+     *
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница добавления задания
+     */
     @GetMapping("/addTask")
     public String addTask(Model model, HttpServletRequest request) {
         User user = UserUtil.getSessionUser(request);
@@ -82,18 +109,36 @@ public class TaskController {
         return "task/addTask";
     }
 
+    /**
+     * Обрабатывает POST запрос, передает объект задания на сервисный уровень
+     * для выполнения создания объекта или обновления, если объект задания
+     * существует, возвращает страницу списка всех заданий.
+     *
+     * @param task задание
+     * @param categoryIds идентификаторы выбранных категорий
+     * @param request запрос пользователя
+     * @return страница со списком заданий
+     */
     @PostMapping("/addOrUpdateTask")
     public String saveTask(@ModelAttribute Task task,
                            @RequestParam(value = "categoryIds", required = false) List<Integer> categoryIds,
                            HttpServletRequest request) {
         User user = UserUtil.getSessionUser(request);
         task.setUser(user);
-        List<Category> categories = categoryService.findCategoriesByIds(categoryIds);
-        task.setCategories(categories);
+        task.setCategories(categoryService.findCategoriesByIds(categoryIds));
         taskService.addOrUpdateTask(task);
         return "redirect:/tasks";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу с подробной
+     * информацией о задании.
+     *
+     * @param taskId идентификатор задания
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница с подробной информацией о задании
+     */
     @GetMapping("/taskDetails{taskId}")
     public String getTaskDetails(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
@@ -102,6 +147,16 @@ public class TaskController {
         return "task/taskDetails";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу с подробной
+     * информацией о задании. Вызывается метод для перевода задания
+     * в разряд выполненных.
+     *
+     * @param taskId идентификатор задания
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница с подробной информацией о задании
+     */
     @GetMapping("/taskDone{taskId}")
     public String taskDone(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
@@ -111,6 +166,14 @@ public class TaskController {
         return "task/taskDetails";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу редактирования задания.
+     *
+     * @param taskId идентификатор задания
+     * @param model модель
+     * @param request запрос пользователя
+     * @return страница редактирования задания
+     */
     @GetMapping("/editTask{taskId}")
     public String editTask(@RequestParam(value = "taskId") int taskId,
             Model model, HttpServletRequest request) {
@@ -129,9 +192,14 @@ public class TaskController {
         return "task/editTask";
     }
 
+    /**
+     * Обрабатывает GET запрос, возвращает страницу списка заданий.
+     *
+     * @param taskId идентификатор задания
+     * @return страница списка заданий
+     */
     @GetMapping("/deleteTask{taskId}")
-    public String deleteTask(@RequestParam(value = "taskId") int taskId,
-            HttpServletRequest request) {
+    public String deleteTask(@RequestParam(value = "taskId") int taskId) {
         taskService.deleteTaskById(taskId);
         return "redirect:/tasks";
     }

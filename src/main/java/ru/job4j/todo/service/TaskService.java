@@ -1,35 +1,33 @@
 package ru.job4j.todo.service;
 
-import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
 
 import java.util.List;
 
 /**
  * Сервис по работе с задачами
- *
+ * @see ru.job4j.todo.model.Task
  * @author Alexander Emelyanov
  * @version 1.0
- * @see ru.job4j.todo.model.Task
  */
 public interface TaskService {
 
     /**
-     * Возвращает список новых задач
+     * Возвращает список новых задач.
      *
      * @return список новых задач
      */
     List<Task> findAllTasks();
 
     /**
-     * Возвращает список новых задач
+     * Возвращает список новых задач.
      *
      * @return список новых задач
      */
     List<Task> findNewTasks();
 
     /**
-     * Возвращает список выполненных задач
+     * Возвращает список выполненных задач.
      *
      * @return список выполненных задач
      */
@@ -37,7 +35,7 @@ public interface TaskService {
 
     /**
      * Выполняет поиск задачи по идентификатору. При успешном нахождении возвращает
-     * задачу, иначе выбрасывает исключение.
+     * задачу.
      *
      * @param id идентификатор задачи
      * @return задачу при успешном нахождении
@@ -53,7 +51,7 @@ public interface TaskService {
 
     /**
      * Выполняет сохранение задачи. При успешном сохранении возвращает
-     * сохраненную задачу, иначе выбрасывается исключение.
+     * сохраненную задачу.
      *
      * @param task сохраняемая задача
      * @return задача при успешном сохранении
@@ -69,7 +67,7 @@ public interface TaskService {
     Task addOrUpdateTask(Task task);
 
     /**
-     * Выполняет установку статуса выполнения задачи последующим обновлением задачи.
+     * Выполняет установку статуса задачи в выполнено.
      *
      * @param id идентификатор задачи
      * @return задача при успешном обновлении статуса
@@ -82,13 +80,4 @@ public interface TaskService {
      * @param id идентификатор задачи
      */
     void deleteTaskById(int id);
-
-    /**
-     * Выполняет поиск приоритета по имени. При успешном нахождении возвращает
-     * приоритет, иначе выбрасывает исключение.
-     *
-     * @param name имя приоритета
-     * @return приоритет при успешном нахождении
-     */
-    Priority findPriorityByName(String name);
 }

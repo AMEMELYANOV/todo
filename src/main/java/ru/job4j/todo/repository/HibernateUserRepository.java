@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 /**
  * Реализация хранилища пользователей
- * @see TaskRepository
+ * @see ru.job4j.todo.repository.UserRepository
  * @author Alexander Emelyanov
  * @version 1.0
  */
@@ -25,7 +25,7 @@ import java.util.function.Function;
 public class HibernateUserRepository implements UserRepository {
 
     /**
-     * SQL запрос по выбору задачи из таблицы tasks с фильтром по id
+     * SQL запрос по выбору задачи из таблицы tasks с фильтром по логину
      */
     private final static String FIND_USER_BY_LOGIN = "from User u where u.login = :login";
 

@@ -64,6 +64,9 @@ public class Task {
     @JoinColumn(name = "priority_id")
     private Priority priority;
 
+    /**
+     * Список категорий задачи
+     */
     @ManyToMany
     @JoinTable(
             name = "tasks_categories",

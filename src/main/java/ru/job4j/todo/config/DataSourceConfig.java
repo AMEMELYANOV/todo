@@ -15,6 +15,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataSourceConfig {
 
+    /**
+     * Создание объекта (bean), используемого для
+     * подключения к базе данных приложения,
+     * параметры считываются из файла /resources/hibernate.cfg.xml
+     *
+     * @return объект (фабрика сессий)
+     */
     @Bean(destroyMethod = "close")
     public SessionFactory sf() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()

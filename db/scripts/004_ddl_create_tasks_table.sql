@@ -12,5 +12,7 @@ COMMENT ON TABLE tasks IS 'Задачи';
 COMMENT ON COLUMN tasks.id IS 'Идентификатор задачи';
 COMMENT ON COLUMN tasks.name IS 'Наименование задачи';
 COMMENT ON COLUMN tasks.description IS 'Подробное описание задачи';
+COMMENT ON COLUMN tasks.created IS 'Время создания задачи';
 COMMENT ON COLUMN tasks.done IS 'Статус задачи';
 COMMENT ON COLUMN tasks.user_id IS 'Ссылка на пользователя';
+COMMENT ON COLUMN tasks.priority_id IS 'Ссылка на приоритет';

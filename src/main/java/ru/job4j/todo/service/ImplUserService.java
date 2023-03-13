@@ -28,7 +28,7 @@ public class ImplUserService implements UserService {
      *
      * @param user сохраняемый пользователь
      * @return пользователя при успешном сохранении
-     * @exception IllegalArgumentException, если сохранение пользователя не произошло
+     * @exception IllegalArgumentException если сохранение пользователя не произошло
      */
     @Override
     public User add(User user) {
@@ -38,11 +38,10 @@ public class ImplUserService implements UserService {
     }
 
     /**
-     * Выполняет обновление пользователя. Если старый пароль
-     * подтвержден.
+     * Выполняет обновление пользователя.
      *
      * @param user обновляемый пользователь
-     * @exception NoSuchElementException, если пользователь не найден
+     * @exception NoSuchElementException если пользователь не найден
      * @return пользователь при успешном обновлении
      */
     @Override
@@ -58,7 +57,7 @@ public class ImplUserService implements UserService {
      *
      * @param login логин (почтовый адрес) пользователя
      * @return пользователя при успешном нахождении
-     * @exception NoSuchElementException, если пользователь не найден
+     * @exception NoSuchElementException если пользователь не найден
      */
     @Override
     public User findUserByLogin(String login) {
@@ -76,7 +75,7 @@ public class ImplUserService implements UserService {
      *
      * @param user пользователя
      * @return пользователя при успешном при совпадении пароля и логина (почтового адреса)
-     * @exception IllegalArgumentException, если пароли пользователя не совпали
+     * @exception IllegalArgumentException если пароли пользователя не совпали
      */
     @Override
     public User validateUserLogin(User user) {

@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 /**
  * Реализация хранилища приоритетов
- * @see PriorityRepository
+ * @see ru.job4j.todo.repository.PriorityRepository
  * @author Alexander Emelyanov
  * @version 1.0
  */

@@ -9,30 +9,35 @@ import java.util.List;
 
 /**
  * Реализация сервиса по работе с задачами
- *
+ * @see ru.job4j.todo.service.CategoryService
  * @author Alexander Emelyanov
  * @version 1.0
- * @see TaskService
  */
 @AllArgsConstructor
 @Service
 public class ImplCategoryService implements CategoryService {
 
     /**
-     * Объект для доступа к методам TaskRepository
+     * Объект для доступа к методам CategoryRepository
      */
     private final CategoryRepository categoryRepository;
 
     /**
-     * Возвращает список всех задач
+     * Возвращает список всех категорий
      *
-     * @return список всех задач
+     * @return список категорий
      */
     @Override
     public List<Category> findAllCategories() {
         return categoryRepository.findAllCategories();
     }
 
+    /**
+     * Выполняет возврат всех категорий с фильтром по идентификатору.
+     *
+     * @param categoryIds список идентификаторов категорий
+     * @return список категорий
+     */
     @Override
     public List<Category> findCategoriesByIds(List<Integer> categoryIds) {
         return categoryRepository.findCategoriesByIds(categoryIds);

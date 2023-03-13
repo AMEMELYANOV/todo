@@ -59,7 +59,7 @@ public class HibernateTaskRepository implements TaskRepository {
     private final SessionFactory sessionFactory;
 
     /**
-     * Выполняет переданный метод оборачиваю в транзакцию
+     * Выполняет переданный метод оборачиваю в транзакцию.
      *
      * @param command выполняемый метод
      * @return объект результат выполнения переданного метода
@@ -81,7 +81,7 @@ public class HibernateTaskRepository implements TaskRepository {
     }
 
     /**
-     * Возвращает список всех задач
+     * Возвращает список всех задач.
      *
      * @return список всех задач
      */
@@ -92,7 +92,7 @@ public class HibernateTaskRepository implements TaskRepository {
     }
 
     /**
-     * Возвращает список всех новых задач
+     * Возвращает список всех новых задач.
      *
      * @return список всех задач
      */
@@ -103,7 +103,7 @@ public class HibernateTaskRepository implements TaskRepository {
     }
 
     /**
-     * Возвращает список всех выполненных задач
+     * Возвращает список всех выполненных задач.
      *
      * @return список всех задач
      */
@@ -116,7 +116,7 @@ public class HibernateTaskRepository implements TaskRepository {
     /**
      * Выполняет поиск задачи по идентификатору. Возвращает Optional
      * с объектом задачи. Возвращаемый Optional может содержать null,
-     * если задача не найдена
+     * если задача не найдена.
      *
      * @param id идентификатор задачи
      * @return Optional.ofNullable() с объектом task
@@ -149,7 +149,7 @@ public class HibernateTaskRepository implements TaskRepository {
 
     /**
      * Выполняет добавление задачи. Возвращает
-     * задачу с проинициализированным id.
+     * задачу с проинициализированным идентификатором.
      *
      * @param task задача
      * @return Optional.ofNullable() с сохраненным объектом task
@@ -165,7 +165,7 @@ public class HibernateTaskRepository implements TaskRepository {
     }
 
     /**
-     * Выполняет удаление задачи.
+     * Выполняет удаление задачи по идентификатору.
      *
      * @param id идентификатор задачи
      */

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Хранилище категорий
- * @see Category
+ * @see ru.job4j.todo.model.Category
  * @author Alexander Emelyanov
  * @version 1.0
  */
@@ -19,5 +19,11 @@ public interface CategoryRepository {
      */
     List<Category> findAllCategories();
 
+    /**
+     * Выполняет возврат всех категорий из базы данных с фильтром по идентификатору.
+     *
+     * @param categoryIds список идентификаторов категорий
+     * @return список категорий
+     */
     List<Category> findCategoriesByIds(List<Integer> categoryIds);
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 /**
  * Хранилище приоритетов
- * @see Priority
+ * @see ru.job4j.todo.model.Priority
  * @author Alexander Emelyanov
  * @version 1.0
  */

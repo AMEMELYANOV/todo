@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 /**
  * Реализация хранилища категорий
- * @see CategoryRepository
+ * @see ru.job4j.todo.repository.CategoryRepository
  * @author Alexander Emelyanov
  * @version 1.0
  */
@@ -29,7 +29,7 @@ public class HibernateCategoryRepository implements CategoryRepository {
     private final static String FIND_ALL_CATEGORIES = "from Category c order by c.id";
 
     /**
-     * SQL запрос по выбору всех категорий из таблицы categories по списку id
+     * SQL запрос по выбору всех категорий из таблицы categories по списку идентификаторов
      */
     private final static String FIND_ALL_CATEGORIES_BY_IDS = "from Category c where c.id in :ids order by c.id";
 
@@ -71,6 +71,12 @@ public class HibernateCategoryRepository implements CategoryRepository {
                 session -> session.createQuery(FIND_ALL_CATEGORIES).list());
     }
 
+    /**
+     * Выполняет возврат всех категорий из базы данных с фильтром по идентификатору.
+     *
+     * @param categoryIds список идентификаторов категорий
+     * @return список категорий
+     */
     @Override
     public List<Category> findCategoriesByIds(List<Integer> categoryIds) {
         return this.execute(

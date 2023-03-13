@@ -1,25 +1,29 @@
 package ru.job4j.todo.service;
 
 import ru.job4j.todo.model.Category;
-import ru.job4j.todo.model.Task;
 
 import java.util.List;
 
 /**
- * Сервис по работе с задачами
- *
+ * Сервис по работе с категориями
+ * @see ru.job4j.todo.model.Category
  * @author Alexander Emelyanov
  * @version 1.0
- * @see Task
  */
 public interface CategoryService {
 
     /**
-     * Возвращает список новых задач
+     * Возвращает список всех категорий
      *
-     * @return список новых задач
+     * @return список категорий
      */
     List<Category> findAllCategories();
 
+    /**
+     * Выполняет возврат всех категорий с фильтром по идентификатору.
+     *
+     * @param categoryIds список идентификаторов категорий
+     * @return список категорий
+     */
     List<Category> findCategoriesByIds(List<Integer> categoryIds);
 }

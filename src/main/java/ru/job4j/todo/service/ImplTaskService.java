@@ -12,10 +12,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Реализация сервиса по работе с задачами
- *
+ * @see ru.job4j.todo.service.TaskService
  * @author Alexander Emelyanov
  * @version 1.0
- * @see ru.job4j.todo.service.TaskService
  */
 @AllArgsConstructor
 @Service
@@ -29,10 +28,10 @@ public class ImplTaskService implements TaskService {
     /**
      * Объект для доступа к методам PriorityRepository
      */
-    private final PriorityRepository priorityRepository;
+    private final PriorityService priorityRepository;
 
     /**
-     * Возвращает список всех задач
+     * Возвращает список всех задач.
      *
      * @return список всех задач
      */
@@ -42,7 +41,7 @@ public class ImplTaskService implements TaskService {
     }
 
     /**
-     * Возвращает список новых задач
+     * Возвращает список новых задач.
      *
      * @return список новых задач
      */
@@ -52,7 +51,7 @@ public class ImplTaskService implements TaskService {
     }
 
     /**
-     * Возвращает список выполненных задач
+     * Возвращает список выполненных задач.
      *
      * @return список выполненных задач
      */
@@ -67,7 +66,7 @@ public class ImplTaskService implements TaskService {
      *
      * @param id идентификатор задачи
      * @return задачу при успешном нахождении
-     * @exception NoSuchElementException, если задача не найдена
+     * @exception NoSuchElementException если задача не найдена
      */
     @Override
     public Task findTaskById(int id) {
@@ -80,11 +79,11 @@ public class ImplTaskService implements TaskService {
      * Выполняет обновление задачи.
      *
      * @param task обновляемая задача
-     * @exception NoSuchElementException, если задача не найдена
+     * @exception NoSuchElementException если задача не найдена
      */
     @Override
     public Task update(Task task) {
-        Priority priorityFromDB = findPriorityByName(task.getPriority().getName());
+        Priority priorityFromDB = priorityRepository.findPriorityByName(task.getPriority().getName());
         task.setPriority(priorityFromDB);
         return taskRepository.update(task).orElseThrow(
                 () -> new IllegalArgumentException(
@@ -97,11 +96,11 @@ public class ImplTaskService implements TaskService {
      *
      * @param task сохраняемая задача
      * @return задача при успешном сохранении
-     * @exception IllegalArgumentException, если сохранение задачи не произошло
+     * @exception IllegalArgumentException если сохранение задачи не произошло
      */
     @Override
     public Task add(Task task) {
-        Priority priorityFromDB = findPriorityByName(task.getPriority().getName());
+        Priority priorityFromDB = priorityRepository.findPriorityByName(task.getPriority().getName());
         task.setPriority(priorityFromDB);
         return taskRepository.add(task).orElseThrow(
                 () -> new IllegalArgumentException(
@@ -126,7 +125,7 @@ public class ImplTaskService implements TaskService {
     }
 
     /**
-     * Выполняет установку статуса выполнения задачи последующим обновлением задачи.
+     * Выполняет установку статуса задачи в выполнено.
      *
      * @param id идентификатор задачи
      * @return задача при успешном обновлении статуса
@@ -146,20 +145,5 @@ public class ImplTaskService implements TaskService {
     @Override
     public void deleteTaskById(int id) {
         taskRepository.deleteTaskById(id);
-    }
-
-    /**
-     * Выполняет поиск приоритета по имени. При успешном нахождении возвращает
-     * приоритет, иначе выбрасывает исключение.
-     *
-     * @param name имя приоритета
-     * @return приоритет при успешном нахождении
-     * @exception NoSuchElementException, если задача не найдена
-     */
-    @Override
-    public Priority findPriorityByName(String name) {
-        return priorityRepository.findPriorityByName(name).orElseThrow(
-                () -> new NoSuchElementException(
-                        String.format("Приоритет c name = %s не найден", name)));
     }
 }
