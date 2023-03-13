@@ -29,7 +29,7 @@
                         <input type="email" class="form-control" name="email" th:field="*{login}">
                         <span style="color:#ff0000;"
                               th:if="${#fields.hasErrors('login')}"
-                              th:errors="*{email}">Email Error</span>
+                              th:errors="*{login}">Email Error</span>
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
