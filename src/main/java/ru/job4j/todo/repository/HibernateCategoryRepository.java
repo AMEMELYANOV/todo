@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Category;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -32,6 +33,15 @@ public class HibernateCategoryRepository implements CategoryRepository {
      * SQL запрос по выбору всех категорий из таблицы categories по списку идентификаторов
      */
     private final static String FIND_ALL_CATEGORIES_BY_IDS = "from Category c where c.id in :ids order by c.id";
+
+    /**
+     * SQL запрос по удалению категории из таблицы categories с фильтром по id
+     */
+    private final static String DELETE_CATEGORY_BY_ID = "delete Category where id = :id";
+    /**
+     * SQL запрос по выбору категории из таблицы categories с фильтром по id
+     */
+    private final static String FIND_CATEGORY_BY_ID = "select distinct c from Category c where c.id = :id";
 
     /**
      * Объект для выполнения подключения к базе данных приложения
@@ -85,5 +95,69 @@ public class HibernateCategoryRepository implements CategoryRepository {
                     query.setParameter("ids", categoryIds);
                     return query.list();
                 });
+    }
+
+    /**
+     * Выполняет поиск категории по идентификатору. Возвращает Optional
+     * с объектом категории. Возвращаемый Optional может содержать null,
+     * если категория не найдена.
+     *
+     * @param id идентификатор категории
+     * @return Optional.ofNullable() с объектом category
+     */
+    @Override
+    public Optional<Category> findCategoryById(int id) {
+        return this.execute(
+                session -> {
+                    Query<Category> query = session.createQuery(FIND_CATEGORY_BY_ID, Category.class);
+                    query.setParameter("id", id);
+                    return Optional.ofNullable(query.uniqueResult());
+                });
+    }
+
+    /**
+     * Выполняет обновление категории.
+     *
+     * @param category категории
+     * @return Optional.ofNullable() с обновленным объектом category
+     */
+    @Override
+    public Optional<Category> update(Category category) {
+        return this.execute(
+                session -> {
+                    session.update(category);
+                    return Optional.ofNullable(category);
+                }
+        );
+    }
+
+    /**
+     * Выполняет добавление категории. Возвращает
+     * категорию с проинициализированным идентификатором.
+     *
+     * @param category задача
+     * @return Optional.ofNullable() с сохраненным объектом category
+     */
+    @Override
+    public Optional<Category> add(Category category) {
+        return this.execute(
+                session -> {
+                    session.save(category);
+                    return Optional.ofNullable(category);
+                }
+        );
+    }
+
+    /**
+     * Выполняет удаление категории по идентификатору.
+     *
+     * @param id идентификатор категории
+     */
+    @Override
+    public void deleteCategoryById(int id) {
+        this.execute(session -> session.createQuery(
+                        DELETE_CATEGORY_BY_ID)
+                .setParameter("id", id)
+                .executeUpdate());
     }
 }

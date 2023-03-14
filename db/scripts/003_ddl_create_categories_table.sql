@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS  categories (
    id SERIAL PRIMARY KEY,
-   name TEXT UNIQUE NOT NULL
+   name varchar UNIQUE NOT NULL
 );
 
 COMMENT ON TABLE categories IS 'Категории';

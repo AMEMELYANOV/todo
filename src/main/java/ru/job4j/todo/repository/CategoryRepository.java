@@ -1,8 +1,11 @@
 package ru.job4j.todo.repository;
 
+import org.hibernate.query.Query;
 import ru.job4j.todo.model.Category;
+import ru.job4j.todo.model.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Хранилище категорий
@@ -26,4 +29,38 @@ public interface CategoryRepository {
      * @return список категорий
      */
     List<Category> findCategoriesByIds(List<Integer> categoryIds);
+
+    /**
+     * Выполняет поиск категории по идентификатору. Возвращает Optional
+     * с объектом категории. Возвращаемый Optional может содержать null,
+     * если категория не найдена.
+     *
+     * @param id идентификатор категории
+     * @return Optional.ofNullable() с объектом category
+     */
+    Optional<Category> findCategoryById(int id);
+
+    /**
+     * Выполняет обновление категории.
+     *
+     * @param category категории
+     * @return Optional.ofNullable() с обновленным объектом category
+     */
+    Optional<Category> update(Category category);
+
+    /**
+     * Выполняет добавление категории. Возвращает
+     * категорию с проинициализированным идентификатором.
+     *
+     * @param category задача
+     * @return Optional.ofNullable() с сохраненным объектом category
+     */
+    Optional<Category> add(Category category);
+
+    /**
+     * Выполняет удаление категории по идентификатору.
+     *
+     * @param id идентификатор категории
+     */
+    void deleteCategoryById(int id);
 }
