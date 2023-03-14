@@ -56,6 +56,7 @@ class HibernatePriorityRepositoryTest {
                 .name("priority")
                 .position(1)
                 .build();
+        priorityRepository.add(priority);
     }
 
     /**
@@ -67,7 +68,6 @@ class HibernatePriorityRepositoryTest {
      */
     @Test
     void whenFindPriorityByIdThenGetPriorityFromDB() {
-        priority = priorityRepository.add(priority).orElse(null);
         Priority priorityFromDB = priorityRepository.findPriorityById(priority.getId()).get();
 
         assertThat(priorityFromDB.getName()).isEqualTo(priority.getName());
@@ -76,11 +76,10 @@ class HibernatePriorityRepositoryTest {
     /**
      * Создается объект priority и сохраняется в базе данных.
      * Через вызов метода {@link PriorityRepository#findPriorityById(int)}
-     * по идентификатору, которого нет в базе данных получаем Optional.empty
+     * по идентификатору, которого нет в базе данных, получаем Optional.empty
      */
     @Test
     void whenFindPriorityByIdThenGetOptionalEmpty() {
-        priority = priorityRepository.add(priority).orElse(null);
         Optional<Priority> priorityFromDB = priorityRepository.findPriorityById(priority.getId() + 1);
 
         assertThat(priorityFromDB).isEqualTo(Optional.empty());
@@ -96,11 +95,24 @@ class HibernatePriorityRepositoryTest {
      */
     @Test
     public void whenUpdatePriorityThenGetTheSameFromDatabase() {
-        priorityRepository.add(priority);
         priority.setName("priority2");
         Priority updatedPriority = priorityRepository.update(priority).get();
 
         assertThat(priority.getId()).isEqualTo(updatedPriority.getId());
+    }
+
+
+    /**
+     * Создается объект priority и сохраняется в базе данных.
+     * По полю id объект priority находится в базе данных, сохраняется в объект priorityFromDB
+     * при помощи метода {@link PriorityRepository#findPriorityById(int)}
+     * и проверяется его эквивалентность объекту priority по полю name.
+     */
+    @Test
+    void whenAddPriorityThenGetTheSameFromDatabase() {
+        Priority priorityFromDB = priorityRepository.findPriorityById(priority.getId()).get();
+
+        assertThat(priority.getName()).isEqualTo(priorityFromDB.getName());
     }
 
      /**
@@ -127,7 +139,6 @@ class HibernatePriorityRepositoryTest {
      */
     @Test
     void whenFindPriorityByNameThenGetPriorityFromDB() {
-        priority = priorityRepository.add(priority).orElse(null);
         Priority priorityFromDB = priorityRepository.findPriorityByName(priority.getName()).get();
 
         assertThat(priorityFromDB.getName()).isEqualTo(priority.getName());
@@ -140,7 +151,6 @@ class HibernatePriorityRepositoryTest {
      */
     @Test
     void whenFindPriorityByNameThenGetOptionalEmpty() {
-        priority = priorityRepository.add(priority).orElse(null);
         Optional<Priority> priorityFromDB = priorityRepository.findPriorityByName(priority.getName() + 1);
 
         assertThat(priorityFromDB).isEqualTo(Optional.empty());

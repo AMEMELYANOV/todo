@@ -95,7 +95,7 @@ class HibernateCategoryRepositoryTest {
      */
     @Test
     void whenFindCategoryByIdsThenGetCategoriesFromDB() {
-        category = categoryRepository.add(category).orElse(null);
+        categoryRepository.add(category).get();
         List<Category> categories = categoryRepository
                 .findCategoriesByIds(List.of(category.getId()));
 
@@ -113,7 +113,7 @@ class HibernateCategoryRepositoryTest {
      */
     @Test
     void whenFindCategoryByIdsThenGetEmptyList() {
-        category = categoryRepository.add(category).orElse(null);
+        categoryRepository.add(category).get();
         List<Category> categories = categoryRepository
                 .findCategoriesByIds(List.of(category.getId() + 1));
 
@@ -130,7 +130,7 @@ class HibernateCategoryRepositoryTest {
      */
     @Test
     void whenFindCategoryByIdThenGetCategoryFromDB() {
-        category = categoryRepository.add(category).orElse(null);
+        categoryRepository.add(category).get();
         Category categoryFromDB = categoryRepository.findCategoryById(category.getId()).get();
 
         assertThat(categoryFromDB.getName()).isEqualTo(category.getName());
@@ -143,7 +143,7 @@ class HibernateCategoryRepositoryTest {
      */
     @Test
     void whenFindCategoryByIdThenGetOptionalEmpty() {
-        category = categoryRepository.add(category).orElse(null);
+        categoryRepository.add(category).get();
         Optional<Category> categoryFromDB = categoryRepository.findCategoryById(category.getId() + 1);
 
         assertThat(categoryFromDB).isEqualTo(Optional.empty());
@@ -164,6 +164,21 @@ class HibernateCategoryRepositoryTest {
         Category updatedCategory = categoryRepository.update(category).get();
 
         assertThat(category.getId()).isEqualTo(updatedCategory.getId());
+    }
+
+
+    /**
+     * Создается объект category и сохраняется в базе данных.
+     * По полю id объект category находится в базе данных, сохраняется в объект categoryFromDB
+     * при помощи метода {@link CategoryRepository#findCategoryById(int)}
+     * и проверяется его эквивалентность объекту category по полю name.
+     */
+    @Test
+    void whenAddCategoryThenGetTheSameFromDatabase() {
+        categoryRepository.add(category);
+        Category categoryFromDB = categoryRepository.add(category).get();
+
+        assertThat(category.getName()).isEqualTo(categoryFromDB.getName());
     }
 
      /**
