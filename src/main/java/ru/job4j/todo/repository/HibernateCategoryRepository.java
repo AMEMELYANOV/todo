@@ -38,6 +38,7 @@ public class HibernateCategoryRepository implements CategoryRepository {
      * SQL запрос по удалению категории из таблицы categories с фильтром по id
      */
     private final static String DELETE_CATEGORY_BY_ID = "delete Category where id = :id";
+
     /**
      * SQL запрос по выбору категории из таблицы categories с фильтром по id
      */
@@ -135,7 +136,7 @@ public class HibernateCategoryRepository implements CategoryRepository {
      * Выполняет добавление категории. Возвращает
      * категорию с проинициализированным идентификатором.
      *
-     * @param category задача
+     * @param category категория
      * @return Optional.ofNullable() с сохраненным объектом category
      */
     @Override

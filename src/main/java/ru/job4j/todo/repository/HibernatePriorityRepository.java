@@ -29,6 +29,16 @@ public class HibernatePriorityRepository implements PriorityRepository {
     private final static String FIND_PRIORITY_BY_NAME = "from Priority p where p.name = :name";
 
     /**
+     * SQL запрос по выбору приоритета из таблицы priorities с фильтром по id
+     */
+    private final static String FIND_PRIORITY_BY_ID = "select distinct p from Priority p where p.id = :id";
+
+    /**
+     * SQL запрос по удалению приоритета из таблицы priorities с фильтром по id
+     */
+    private final static String DELETE_PRIORITY_BY_ID = "delete Priority where id = :id";
+
+    /**
      * Объект для выполнения подключения к базе данных приложения
      */
     private final SessionFactory sessionFactory;
@@ -53,6 +63,66 @@ public class HibernatePriorityRepository implements PriorityRepository {
         } finally {
             session.close();
         }
+    }
+
+    /**
+     * Выполняет поиск приоритета по идентификатору. Возвращает Optional
+     * с объектом приоритета. Возвращаемый Optional может содержать null,
+     * если приоритет не найден.
+     *
+     * @param id идентификатор приоритета
+     * @return Optional.ofNullable() с объектом priority
+     */
+    public Optional<Priority> findPriorityById(int id) {
+        return this.execute(
+                session -> {
+                    Query<Priority> query = session.createQuery(FIND_PRIORITY_BY_ID, Priority.class);
+                    query.setParameter("id", id);
+                    return query.uniqueResult();
+                });
+    }
+
+    /**
+     * Выполняет обновление приоритета.
+     *
+     * @param priority приоритета
+     * @return Optional.ofNullable() с обновленным объектом priority
+     */
+    public Optional<Priority> update(Priority priority) {
+        return this.execute(
+                session -> {
+                    session.update(priority);
+                    return priority;
+                }
+        );
+    }
+
+    /**
+     * Выполняет добавление приоритета. Возвращает
+     * приоритет с проинициализированным идентификатором.
+     *
+     * @param priority приоритет
+     * @return Optional.ofNullable() с сохраненным объектом priority
+     */
+    public Optional<Priority> add(Priority priority) {
+        return this.execute(
+                session -> {
+                    session.save(priority);
+                    return priority;
+                }
+        );
+    }
+
+    /**
+     * Выполняет удаление приоритета по идентификатору.
+     *
+     * @param id идентификатор приоритета
+     */
+    public void deletePriorityById(int id) {
+        this.execute(session -> session.createQuery(
+                        DELETE_PRIORITY_BY_ID)
+                .setParameter("id", id)
+                .executeUpdate());
     }
 
     /**

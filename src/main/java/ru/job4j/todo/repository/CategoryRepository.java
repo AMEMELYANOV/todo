@@ -1,8 +1,6 @@
 package ru.job4j.todo.repository;
 
-import org.hibernate.query.Query;
 import ru.job4j.todo.model.Category;
-import ru.job4j.todo.model.Task;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +50,7 @@ public interface CategoryRepository {
      * Выполняет добавление категории. Возвращает
      * категорию с проинициализированным идентификатором.
      *
-     * @param category задача
+     * @param category категория
      * @return Optional.ofNullable() с сохраненным объектом category
      */
     Optional<Category> add(Category category);

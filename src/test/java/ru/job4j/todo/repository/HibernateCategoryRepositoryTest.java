@@ -14,6 +14,12 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Тест класс реализации хранилища приоритетов
+ * @see ru.job4j.todo.repository.CategoryRepository
+ * @author Alexander Emelyanov
+ * @version 1.0
+ */
 class HibernateCategoryRepositoryTest {
 
     /**
@@ -136,7 +142,7 @@ class HibernateCategoryRepositoryTest {
      * по идентификатору, которого нет в базе данных получаем Optional.empty
      */
     @Test
-    void whenFindCategoryByIdsThenGetOptionalEmpty() {
+    void whenFindCategoryByIdThenGetOptionalEmpty() {
         category = categoryRepository.add(category).orElse(null);
         Optional<Category> categoryFromDB = categoryRepository.findCategoryById(category.getId() + 1);
 
