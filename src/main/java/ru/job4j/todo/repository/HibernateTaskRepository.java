@@ -27,7 +27,7 @@ public class HibernateTaskRepository implements TaskRepository {
     /**
      * SQL запрос по выбору всех задач из таблицы tasks
      */
-    private final static String FIND_ALL_TASKS = "select distinct t  from Task t join fetch t.priority "
+    private final static String FIND_ALL_TASKS = "select distinct t from Task t join fetch t.priority "
             + "join fetch t.categories order by t.id";
 
     /**

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
-import ru.job4j.todo.repository.PriorityRepository;
 import ru.job4j.todo.repository.TaskRepository;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class ImplTaskService implements TaskService {
     /**
      * Объект для доступа к методам PriorityRepository
      */
-    private final PriorityService priorityRepository;
+    private final PriorityService priorityService;
 
     /**
      * Возвращает список всех задач.
@@ -83,7 +82,7 @@ public class ImplTaskService implements TaskService {
      */
     @Override
     public Task update(Task task) {
-        Priority priorityFromDB = priorityRepository.findPriorityByName(task.getPriority().getName());
+        Priority priorityFromDB = priorityService.findPriorityByName(task.getPriority().getName());
         task.setPriority(priorityFromDB);
         return taskRepository.update(task).orElseThrow(
                 () -> new IllegalArgumentException(
@@ -100,7 +99,7 @@ public class ImplTaskService implements TaskService {
      */
     @Override
     public Task add(Task task) {
-        Priority priorityFromDB = priorityRepository.findPriorityByName(task.getPriority().getName());
+        Priority priorityFromDB = priorityService.findPriorityByName(task.getPriority().getName());
         task.setPriority(priorityFromDB);
         return taskRepository.add(task).orElseThrow(
                 () -> new IllegalArgumentException(

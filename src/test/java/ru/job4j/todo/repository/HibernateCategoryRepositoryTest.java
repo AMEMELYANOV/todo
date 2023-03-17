@@ -66,7 +66,7 @@ class HibernateCategoryRepositoryTest {
      * на эквивалентность объекту category по полю name.
      */
     @Test
-    void whenFindAllCategoryTheGetCategoriesFromDB() {
+    void whenFindAllCategoryThenGetCategoriesFromDB() {
         categoryRepository.add(category);
         List<Category> categories = categoryRepository.findAllCategories();
 
@@ -119,7 +119,6 @@ class HibernateCategoryRepositoryTest {
 
         assertThat(categories.size()).isEqualTo(0);
     }
-
 
     /**
      * Создается объект category и сохраняется в базе данных.
