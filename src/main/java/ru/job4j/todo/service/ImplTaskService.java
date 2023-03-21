@@ -78,6 +78,7 @@ public class ImplTaskService implements TaskService {
      * Выполняет обновление задачи.
      *
      * @param task обновляемая задача
+     * @return задача при успешном обновлении
      * @exception NoSuchElementException если задача не найдена
      */
     @Override

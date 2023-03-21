@@ -16,6 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
+/**
+ * Тест класс реализации сервисов
+ * @see ru.job4j.todo.service.PriorityService
+ * @author Alexander Emelyanov
+ * @version 1.0
+ */
 class ImplPriorityServiceTest {
 
     /**
@@ -24,7 +30,7 @@ class ImplPriorityServiceTest {
     private PriorityRepository priorityRepository;
 
     /**
-     * Объект для внедрения моков
+     * Объект для доступа к методам PriorityService
      */
     private PriorityService priorityService;
 

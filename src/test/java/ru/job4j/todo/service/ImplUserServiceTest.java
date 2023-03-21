@@ -16,6 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
+/**
+ * Тест класс реализации сервисов
+ * @see ru.job4j.todo.service.UserService
+ * @author Alexander Emelyanov
+ * @version 1.0
+ */
 class ImplUserServiceTest {
 
     /**
@@ -24,7 +30,7 @@ class ImplUserServiceTest {
     private UserRepository userRepository;
 
     /**
-     * Объект для внедрения моков
+     * Объект для доступа к методам UserService
      */
     private UserService userService;
 

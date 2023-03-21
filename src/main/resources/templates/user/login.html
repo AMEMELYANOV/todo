@@ -18,12 +18,12 @@
                 </div>
                 <form th:action="@{/login}" method="POST">
                     <div class="form-group">
-                        <label>Адрес электронной почты</label>
-                        <input type="email" class="form-control" name="login">
+                        <label for="login">Адрес электронной почты</label>
+                        <input type="email" class="form-control" name="login" id="login">
                     </div>
                     <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" class="form-control" name="password">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
                     <button type="submit" class="btn btn-secondary">Продолжить</button>
                 </form>

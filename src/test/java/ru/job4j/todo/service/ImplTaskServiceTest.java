@@ -2,8 +2,6 @@ package ru.job4j.todo.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import ru.job4j.todo.model.Priority;
 import ru.job4j.todo.model.Task;
@@ -17,6 +15,12 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+/**
+ * Тест класс реализации сервисов
+ * @see ru.job4j.todo.service.TaskService
+ * @author Alexander Emelyanov
+ * @version 1.0
+ */
 class ImplTaskServiceTest {
 
     /**
@@ -30,7 +34,7 @@ class ImplTaskServiceTest {
     private PriorityService priorityService;
 
     /**
-     * Объект для внедрения моков
+     * Объект для доступа к методам TaskService
      */
     private TaskService taskService;
 

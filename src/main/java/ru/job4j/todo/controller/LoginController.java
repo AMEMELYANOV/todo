@@ -30,7 +30,7 @@ public class LoginController {
 
     /**
      * Обрабатывает GET запрос, возвращает страницу входа пользователя.
-     * В зависимости от параметров password и account на страницу будут выведены сообщения
+     * В зависимости от параметров error и logout на страницу будут выведены сообщения
      * для пользователя о необходимости исправить вводимые данные.
      *
      * @param error параметр GET запроса, true, если есть ошибка при заполнении формы
@@ -39,7 +39,7 @@ public class LoginController {
      * @param request запрос пользователя
      * @return страница входа пользователя
      */
-    @GetMapping("/login")
+    @GetMapping({"/", "/login"})
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,
                             Model model,

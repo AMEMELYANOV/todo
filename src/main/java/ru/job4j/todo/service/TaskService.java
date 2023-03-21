@@ -46,6 +46,7 @@ public interface TaskService {
      * Выполняет обновление задачи.
      *
      * @param task обновляемая задача
+     * @return задача при успешном обновлении
      */
     Task update(Task task);
 

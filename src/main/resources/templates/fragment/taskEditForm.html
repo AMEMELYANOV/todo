@@ -5,32 +5,32 @@
         <table class="table">
             <input type="hidden" name="id" th:field="*{id}"/>
             <tr>
-                <td>Наименование :</td>
-                <td><input class="form-control" type="text" th:field="*{name}" name="name" required/></td>
+                <td><label for="name">Наименование :</label></td>
+                <td><input class="form-control" type="text" th:field="*{name}" name="name" id="name"/></td>
             </tr>
             <tr>
-                <td>Описание :</td>
+                <td><label for="description">Описание :</label></td>
                 <td><textarea class="form-control" th:field="*{description}" rows="8" maxlength="400"
                               name="description"
-                              placeholder="Не больше 400 символов" required></textarea></td>
+                              placeholder="Не больше 400 символов" id="description"></textarea></td>
             </tr>
             <tr>
-                <td>Статус задания :</td>
-                <td><select class="custom-select" th:field="*{done}">
+                <td><label for="done">Статус задания :</label></td>
+                <td><select class="custom-select" th:field="*{done}" id="done">
                     <option th:value="0" th:text="Активно"></option>
                     <option th:value="1" th:text="Выполнено"></option>
                 </select></td>
             </tr>
             <tr>
-                <td>Приоритет задания :</td>
-                <td><select class="custom-select" th:field="*{priority.name}">
+                <td><label for="priority">Приоритет задания :</label></td>
+                <td><select class="custom-select" th:field="*{priority.name}" id="priority">
                     <option th:value="Высокий" th:text="Высокий"></option>
                     <option th:value="Средний" th:text="Средний"></option>
                     <option th:value="Низкий" th:text="Низкий"></option>
                 </select></td>
             </tr>
             <tr>
-                <td>Категории :</td>
+                <td><label for="categories">Категории :</label></td>
                 <td>
                     <select class="form-control" style="width: 200px;" multiple id="categories" name="categoryIds" required>
                         <option th:each="category : ${categories}"

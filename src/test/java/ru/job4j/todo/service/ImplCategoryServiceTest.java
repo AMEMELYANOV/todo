@@ -15,6 +15,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
+/**
+ * Тест класс реализации сервисов
+ * @see ru.job4j.todo.service.CategoryService
+ * @author Alexander Emelyanov
+ * @version 1.0
+ */
 class ImplCategoryServiceTest {
 
     /**
@@ -23,7 +29,7 @@ class ImplCategoryServiceTest {
     private CategoryRepository categoryRepository;
 
     /**
-     * Объект для внедрения моков
+     * Объект для доступа к методам CategoryService
      */
     private CategoryService categoryService;
 

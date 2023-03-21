@@ -18,29 +18,29 @@
                 </div>
                 <form th:action="@{/registration}" method="POST" th:object="${user}">
                     <div class="form-group">
-                        <label>Ваше имя</label>
-                        <input type="text" class="form-control" name="name" th:field="*{name}">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" class="form-control" name="name" th:field="*{name}" id="name">
                         <span style="color:#ff0000;"
                               th:if="${#fields.hasErrors('name')}"
                               th:errors="*{name}">UserName Error</span>
                     </div>
                     <div class="form-group">
-                        <label>Почта (аккаунт)</label>
-                        <input type="email" class="form-control" name="email" th:field="*{login}">
+                        <label for="login">Почта (аккаунт)</label>
+                        <input type="email" class="form-control" name="email" th:field="*{login}" id="login">
                         <span style="color:#ff0000;"
                               th:if="${#fields.hasErrors('login')}"
                               th:errors="*{login}">Email Error</span>
                     </div>
                     <div class="form-group">
-                        <label>Пароль</label>
-                        <input type="password" class="form-control" name="password" th:field="*{password}">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" name="password" th:field="*{password}" id="password">
                         <span style="color:#ff0000;"
                               th:if="${#fields.hasErrors('password')}"
                               th:errors="*{password}">Password Error</span>
                     </div>
                     <div class="form-group">
-                        <label>Повторите пароль</label>
-                        <input type="password" class="form-control" name="repassword">
+                        <label for="repassword">Повторите пароль</label>
+                        <input type="password" class="form-control" name="repassword" id="repassword">
                     </div>
                     <button type="submit" class="btn btn-secondary">Продолжить</button>
                 </form>
